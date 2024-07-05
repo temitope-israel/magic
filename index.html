@@ -1,0 +1,57 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Twitter Automation</title>
+</head>
+<body>
+    <h1>Twitter Automation</h1>
+    <form id="automationForm">
+        <label for="username">Twitter Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        
+        <label for="password">Twitter Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        
+        <label for="tweetUrls">Paste Text Containing Tweet URLs:</label>
+        <textarea id="tweetUrls" name="tweetUrls" rows="4" cols="50" required></textarea><br><br>
+        
+        <label for="timeout">Timeout (ms):</label>
+        <input type="number" id="timeout" name="timeout" value="25000" required><br><br>
+        
+        <input type="submit" value="Start Automation">
+    </form>
+
+    <script>
+        function extractUrls(text) {
+            const urlPattern = /https?:\/\/[^\s]+/g; // Regex to match URLs
+            const urls = text.match(urlPattern) || [];
+            return urls.filter(url => url.includes("status")); // Filter URLs containing 'status'
+        }
+
+        document.getElementById('automationForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            const extractedUrls = extractUrls(data.tweetUrls);
+            
+            if (extractedUrls.length === 0) {
+                alert('No valid Tweet URLs found.');
+                return;
+            }
+
+            data.tweetUrls = extractedUrls;
+            
+            const response = await fetch('https://your-app-name.herokuapp.com/start-automation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const result = await response.json();
+            alert(result.message);
+        });
+    </script>
+</body>
+</html> -->
